@@ -3,4 +3,4 @@ A “Forum Application” where the users can come, create posts, and read other
 
 ### SnapShot of design
 
-![StreetStyle](./Image/idea.PNG)
+![StreetStyle](./src/Image/idea.PNG)
