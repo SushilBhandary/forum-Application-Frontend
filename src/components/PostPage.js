@@ -4,12 +4,12 @@ import PostsList from "./PostsList"
 
 const  PostPage = ({logout, posts, setPosts}) => {
   return (
-    <div className="bg-[#CFFCE8] h-full" style={{ height: '100vh'}}>
+    <div className="bg-[#CFFCE8] " >
       <Header logout={logout}/>
-      <div className="flex mx-auto w-[95%] mt-8 p-5 justify-between">
+      <div className="flex mx-auto w-[95%] mt-8 p-5 justify-between items-start">
         <PostFunction posts={posts} setPosts={setPosts}/>
         <PostsList  posts={posts} setPosts={setPosts}/>
-      </div>
+      </div> 
     </div>
   )
 }

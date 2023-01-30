@@ -1,13 +1,13 @@
 
 
 const  PostsList = ({posts, setPosts}) => {
-    const name = JSON.parse(localStorage.getItem("jwt")).user.name
+    // const name = JSON.parse(localStorage.getItem("jwt")).user.name
     return (
         <div className="w-[75%] rounded-lg p-5 bg-[#D9D55B]">
             { posts && posts.map( post => (
-                <div  key={post._id}>
+                <div  key={post._id} className="my-2">
                     <div className="rounded-lg py-5 px-8 bg-[#EDBF69]">
-                        <div className="my-5 text-2xl" > <span className="rounded-full bg-[#1B98F5] ">Avartar</span>  {name} 
+                        <div className="my-5 text-2xl" > <span className="rounded-full bg-[#1B98F5] ">Avartar</span>  {post.createdByName} 
                         </div>
                         <div className="my-5 text-xl bg-[#fff] p-2 rounded-md">
                             {post.article}
