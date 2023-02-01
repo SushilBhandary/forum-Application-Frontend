@@ -8,11 +8,22 @@ import API from "./api";
 const  PostsList = ({posts, setPosts}) => {
     // const name = JSON.parse(localStorage.getItem("jwt")).user.name
     const [comment, setComment] = useState('')
+    const [commentList, setCommentList] = useState({})
+
+    const add = (e,id) => {
+        console.log(commentList);
+        commentList[id] = e.target.value
+        setCommentList(commentList)
+        console.log(commentList);
+    }
 
     const addComment = async(e, id) => {
         e.preventDefault()
-        if (!comment) {
-            return toast.warn('Email/Password is missining', {
+        console.log(commentList[id]);
+        console.log(id);
+        console.log(commentList);
+        if (!commentList[id]) {
+            return toast.warn('comment is missining', {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -26,7 +37,7 @@ const  PostsList = ({posts, setPosts}) => {
         const data = JSON.parse(localStorage.getItem("jwt"))
         await axios.post(`${API}/add-comments/${id}`, {
         name : data.name,
-        value : comment
+        value : commentList[id]
         }, {
         headers: {
             authorization: data.token
@@ -51,7 +62,7 @@ const  PostsList = ({posts, setPosts}) => {
               })
               .then( (res) => {
                 setPosts( res.data.posts)
-                setComment('')
+                setCommentList({})
               })
               .catch( e => toast.error(e.response.data.error, {
                 position: "top-center",
@@ -81,7 +92,7 @@ const  PostsList = ({posts, setPosts}) => {
                         <div className="my-5 flex flex-col ">
                             <h1 className="text-2xl ">Comments</h1>
                             <div className=" flex px-5 items-baseline rounded-lg bg-[#F4BE2C]">
-                                <input value={comment} onChange={e => setComment(e.target.value)} type="text" name="comment" placeholder="Add comment" className="w-full px-4 py-2 rounded-md  border-2 mr-2" />
+                                <input value={commentList[post._id]} onChange={e => add(e,post._id)} type="text" name="comment" placeholder="Add comment" className="w-full px-4 py-2 rounded-md  border-2 mr-2" />
                                 <button className="rounded-lg bg-[#BF3312] px-5 py-3 my-5" onClick={e => addComment(e, post._id)}>Add</button>
                             </div>
                             { post.comment && 
