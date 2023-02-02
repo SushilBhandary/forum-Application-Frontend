@@ -5,10 +5,11 @@ import axios from "axios";
 import API from "./api";
 
 
-const  PostsList = ({posts, setPosts}) => {
+const  PostsList = ({posts, setPosts, isMyPost}) => {
     // const name = JSON.parse(localStorage.getItem("jwt")).user.name
     const [comment, setComment] = useState('')
     const [commentList, setCommentList] = useState({})
+    console.log(isMyPost);
 
     const add = (e,id) => {
         console.log(commentList);
@@ -83,6 +84,12 @@ const  PostsList = ({posts, setPosts}) => {
         <div className="w-[75%] rounded-lg p-5 bg-[#D9D55B]">
             { posts && posts.map( post => (
                 <div  key={post._id} className="my-2">
+                    { isMyPost && (
+                        <div>
+                            <button>Edit</button>
+                            <button>delete</button>
+                        </div>
+                    ) }
                     <div className="rounded-lg py-5 px-8 bg-[#EDBF69]">
                         <div className="my-5 text-2xl" > <span className="rounded-full bg-[#1B98F5] ">Avathar</span>  {post.createdByName} 
                         </div>

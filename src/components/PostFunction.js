@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import API from "./api"
 import axios from "axios"
 
-const PostFunction = ({posts, setPosts} ) => {
+const PostFunction = ({posts, setPosts, setIsMyPost} ) => {
   const [open, setOpen] = useState(false);
   const [article, setArticle] = useState('')
   
@@ -51,6 +51,7 @@ const PostFunction = ({posts, setPosts} ) => {
         });
       setArticle('')
       setOpen(false)
+      setIsMyPost(false)
       
     })
     .catch( e => console.log(e))
@@ -67,6 +68,7 @@ const PostFunction = ({posts, setPosts} ) => {
     })
     .then( (res) => {
       setPosts( res.data.posts)
+      setIsMyPost(false)
     })
     .catch( e => toast.error(e.response.data.error, {
       position: "top-center",
@@ -91,6 +93,7 @@ const PostFunction = ({posts, setPosts} ) => {
     })
     .then( (res) => {
       setPosts( res.data.posts)
+      setIsMyPost(true)
     })
     .catch( e => toast.error(e.response.data.error, {
       position: "top-center",
