@@ -86,8 +86,8 @@ const  PostsList = ({posts, setPosts, isMyPost}) => {
                 <div  key={post._id} className="my-2">
                     { isMyPost && (
                         <div>
-                            <button>Edit</button>
-                            <button>delete</button>
+                            <button  className="rounded-lg bg-[#EDC126] px-5 py-3 my-5">Edit</button>
+                            <button  className="rounded-lg bg-[#B4161B] px-5 py-3 my-5">delete</button>
                         </div>
                     ) }
                     <div className="rounded-lg py-5 px-8 bg-[#EDBF69]">
