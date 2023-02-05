@@ -77,8 +77,8 @@ const Login = ({setToSingup}) => {
   return(
     <div>
       { !islogin ? (
-        <div className="flex items-center justify-center h-screen bg-[#CFFCE8]">
-          <div className="w-full max-w-md p-8 space-y-3 rounded-xl ">
+        <div className="flex items-center justify-center h-screen bg-gradient-to-r from-pink-500 to-yellow-500">
+          <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-gradient-to-r from-amber-200 to-yellow-500">
             <h1 className="text-2xl font-bold text-center">Login</h1>
             <form action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
               <div className="space-y-1 text-sm">
@@ -87,12 +87,12 @@ const Login = ({setToSingup}) => {
               </div>
               <div className="space-y-1 text-sm">
                   <label className="block ">Password</label>
-                  <input value={password} onChange={ e =>setPassword(e.target.value)} type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md border-2 " />
+                  <input value={password} onChange={ e =>setPassword(e.target.value)} type="password" placeholder="Password" className="w-full px-4 py-3 rounded-md border-2 " />
               </div>
-              <button onClick={submit} className="block w-full p-3 text-center rounded-sm text-white bg-[#10ABAC] focus:outline-none hover:bg-[#0B8390] rounded ">Login</button>
+              <button onClick={submit} className="block w-full p-3 text-center rounded-sm text-white bg-blue-400 focus:outline-none hover:bg-blue-500 rounded ">Login</button>
             </form>
             <p className="text-xs text-center sm:px-6 ">Don't have an account?
-                <span className="underline " onClick={() => {setToSingup(true)}}> Sign up</span>
+                <span className="underline text-blue-600" onClick={() => {setToSingup(true)}}> Sign up</span>
             </p>
           </div>
           <ToastContainer/>

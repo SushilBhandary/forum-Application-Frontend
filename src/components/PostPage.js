@@ -6,7 +6,7 @@ import { useState } from "react"
 const  PostPage = ({logout, posts, setPosts}) => {
   const [isMyPost, setIsMyPost] = useState(false)
   return (
-    <div className="bg-[#CFFCE8] " >
+    <div className="bg-amber-50  " >
       <Header logout={logout}/>
       <div className="flex mx-auto w-[95%] mt-8 p-5 justify-between items-start">
         <PostFunction posts={posts} setPosts={setPosts} setIsMyPost={setIsMyPost}/>

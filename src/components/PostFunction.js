@@ -52,9 +52,18 @@ const PostFunction = ({posts, setPosts, setIsMyPost} ) => {
       setArticle('')
       setOpen(false)
       setIsMyPost(false)
-      
+      refresh(e)
     })
-    .catch( e => console.log(e))
+    .catch( e => toast.warn('Some thing went wrong', {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    }))
 
   }
 
@@ -109,25 +118,25 @@ const PostFunction = ({posts, setPosts, setIsMyPost} ) => {
   }
 
   return (
-    <div className="w-[20%] rounded-lg p-8 flex flex-col bg-[#FF6263]">
-        <button onClick={() => setOpen(true)} className="px-5 py-3 my-5 rounded-lg bg-[#BF3312]">Create Post</button>
+    <div className="w-[20%] rounded-lg p-8 flex flex-col bg-amber-100">
+        <button onClick={() => setOpen(true)} className="px-5 py-3 my-5 rounded-lg bg-amber-100 bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500 ">Create Post</button>
         <Popup open={open}  modal nested>
-          <form className=" text-lg container p-8 space-y-6 rounded-md shadow  bg-[#AFD344]">
+          <form className=" text-lg container p-8 space-y-6 rounded-md shadow  bg-gradient-to-r from-[#833ab4] to-[#1dc0fd] ">
               <button className="btn btn-circle absolute  top-0 right-0 mt-2 mr-2"  onClick={closeModal}>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
               <h2 className="w-full text-3xl font-bold leading-tight">New Post</h2>
               <div>
                   <label className="block mb-1 ml-1">Post</label>
-                  <textarea value={article} onChange={e => setArticle(e.target.value)} rows={5} placeholder="Post / Article" className="block w-full p-2 rounded border-2 bg-[#F3FBCE]" />
+                  <textarea value={article} onChange={e => setArticle(e.target.value)} rows={5} placeholder="Post / Article" className="block w-full p-2 rounded border-2 bg-[#8de0ff]" />
               </div>
               <div className="text-right">
                   <button onClick={e => submitPost(e)}  className=" px-4 py-2 font-bold rounded shadow text-white bg-blue-500 focus:outline-none hover:bg-blue-600 ">Post</button>
               </div>
           </form>
         </Popup>
-        <button onClick={myPosts} className="px-5 py-3 my-5 rounded-lg bg-[#BF3312]">My Post</button>
-        <button onClick={refresh} className="px-5 py-3 my-5 rounded-lg bg-[#BF3312]">Refresh Posts</button>
+        <button onClick={myPosts} className="px-5 py-3 my-5 rounded-lg bg-amber-100 bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500">My Post</button>
+        <button onClick={refresh} className="px-5 py-3 my-5 rounded-lg bg-amber-100 bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500">Refresh Posts</button>
         <ToastContainer/>
     </div>
   )

@@ -42,8 +42,9 @@ const  PostsList = ({posts, setPosts, isMyPost}) => {
             });
         }
         const data = JSON.parse(localStorage.getItem("jwt"))
+        console.log(data.user.name);
         await axios.post(`${API}/add-comments/${id}`, {
-        name : data.name,
+        name : data.user.name,
         value : commentList[id]
         }, {
         headers: {
@@ -83,11 +84,32 @@ const  PostsList = ({posts, setPosts, isMyPost}) => {
                 })
               )
         })
-        .catch(e => console.log(e))
+        .catch(e => toast.warn('Some thing went wrong', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          }))
     }
 
     const editPost = async (e) => {
         e.preventDefault()
+        if (!article) {
+            return toast.warn('Enter some Post', {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+            });
+        }
         const data = JSON.parse(localStorage.getItem("jwt"))
         await axios.put(`${API}/edit-post/${id}`, {
             article : article
@@ -114,8 +136,18 @@ const  PostsList = ({posts, setPosts, isMyPost}) => {
                 post.article = article;
                 return post
             }))
+            setOpen(false)
         })
-        .catch( e => console.log(e))
+        .catch( e => toast.warn('Some thing went wrong', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          }))
     }
 
     const deletPost = async(e, id) => {
@@ -139,7 +171,16 @@ const  PostsList = ({posts, setPosts, isMyPost}) => {
                 });
             setPosts( posts.filter( post => post._id !== id))
         })
-        .catch( e => console.log("error----> ", e))
+        .catch( e => toast.warn('Some thing went wrong', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          }))
     }
 
     const onEdit = (e, id, article) => {
@@ -149,16 +190,16 @@ const  PostsList = ({posts, setPosts, isMyPost}) => {
     }
 
     return (
-        <div className="w-[75%] rounded-lg p-5 bg-[#D9D55B]">
+        <div className="w-[75%] rounded-lg p-5 bg-amber-100">
             <Popup open={open}  modal nested>
-                <form className=" text-lg container p-8 space-y-6 rounded-md shadow  bg-[#AFD344]">
+                <form className=" text-lg container p-8 space-y-6 rounded-md shadow bg-gradient-to-r from-[#833ab4] to-[#1dc0fd]">
                     <button className="btn btn-circle absolute  top-0 right-0 mt-2 mr-2"  onClick={closeModal}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
                     <h2 className="w-full text-3xl font-bold leading-tight">Edit Post</h2>
                     <div>
                         <label className="block mb-1 ml-1">Post</label>
-                        <textarea value={article} onChange={e => setArticle(e.target.value)} rows={5} placeholder="Post / Article" className="block w-full p-2 rounded border-2 bg-[#F3FBCE]" />
+                        <textarea value={article} onChange={e => setArticle(e.target.value)} rows={5} placeholder="Post / Article" className="block w-full p-2 rounded border-2 bg-[#8de0ff]" />
                     </div>
                     <div className="text-right">
                         <button onClick={e => editPost(e)}  className=" px-4 py-2 font-bold rounded shadow text-white bg-blue-500 focus:outline-none hover:bg-blue-600 ">Update Post</button>
@@ -166,35 +207,44 @@ const  PostsList = ({posts, setPosts, isMyPost}) => {
                 </form>
             </Popup>
             { posts && posts.map( post => (
-                <div  key={post._id} className="my-2 bg-[#EDBF69]">
+                <div  key={post._id} className="my-2 bg-amber-200 rounded-lg ">
                     { isMyPost && (
                         <div className="flex justify-around">
-                            <button onClick={e => onEdit(e, post._id, post.article)} className="rounded-lg bg-[#EDC126] px-5 py-3 my-5">Edit</button>
-                            <button onClick={e => deletPost(e, post._id)}  className="rounded-lg bg-[#B4161B] px-5 py-3 my-5">delete</button>
+                            <button onClick={e => onEdit(e, post._id, post.article)} className="rounded-lg bg-[#EB7B54] px-5 py-3 mt-2">Edit</button>
+                            <button onClick={e => deletPost(e, post._id)}  className="rounded-lg bg-[#fe2054] px-5 py-3 mt-2">delete</button>
                         </div>
                     ) }
                     <div className="rounded-lg py-5 px-8 ">
-                        <div className="my-5 text-2xl" > <span className="rounded-full bg-[#1B98F5] ">Avathar</span>  {post.createdByName} 
+                        <div className="my-5 text-2xl flex items-center" > 
+                            <span class="relative w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex justify-center items-center text-center p-5 shadow-xl mr-4">
+                                {post.createdByName[0]}
+                            </span>
+                            {post.createdByName} 
                         </div>
-                        <div className="my-5 text-xl bg-[#fff] p-2 rounded-md">
+                        <div className="my-5 text-xl bg-[#fff] p-2 rounded-md bg-gradient-to-r from-pink-500 to-yellow-500 text-white">
                             {post.article}
                         </div>
-                        <div className="my-5 flex flex-col ">
-                            <h1 className="text-2xl ">Comments</h1>
-                            <div className=" flex px-5 items-baseline rounded-lg bg-[#F4BE2C]">
-                                <input value={commentList[post._id]} onChange={e => add(e,post._id)} type="text" name="comment" placeholder="Add comment" className="w-full px-4 py-2 rounded-md  border-2 mr-2" />
-                                <button className="rounded-lg bg-[#BF3312] px-5 py-3 my-5" onClick={e => addComment(e, post._id)}>Add</button>
+                        <div className="bg-yellow-300 px-2 rounded-lg">
+                            <div className="my-5 flex flex-col ">
+                                <h1 className="text-2xl ">Comments</h1>
+                                <div className=" flex px-5 items-baseline bg-yellow-300">
+                                    <input value={commentList[post._id]} onChange={e => add(e,post._id)} type="text" name="comment" placeholder="Add comment" className="w-full px-4 py-2 rounded-md  border-2 mr-2 bg-amber-100" />
+                                    <button className="rounded-lg bg-gradient-to-r from-pink-500 to-yellow-500 px-5 py-3 my-5" onClick={e => addComment(e, post._id)}>Add</button>
+                                </div>
+                                { post.comment && 
+                                    post.comment.map(com => (
+                                        <div className=" flex p-5 items-baseline rounded-lg bg-yellow-300 ">
+                                            <div class="relative w-6 h-6 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex justify-center items-center text-center p-5 shadow-xl mr-4">
+                                                {com.userName[0]}
+                                            </div> 
+                                            <div className="mx-2 text-lg">{com.userName}</div>
+                                            <div className="mx-2 text-base bg-amber-100 px-2 py-1 rounded-lg ">{com.comment}</div>
+                                        </div>
+                                    ))
+                                }
                             </div>
-                            { post.comment && 
-                                post.comment.map(com => (
-                                    <div className=" flex p-5 items-baseline rounded-lg bg-[#F4BE2C]">
-                                        <div className="rounded-full bg-[#1B98F5] mx-2" >Avatar</div>
-                                        <div className="mx-2 text-lg">{com.userName}</div>
-                                        <div className="mx-2 text-base">{com.comment}</div>
-                                    </div>
-                                ))
-                            }
                         </div>
+                        
                     </div>
                 </div>
             ))}

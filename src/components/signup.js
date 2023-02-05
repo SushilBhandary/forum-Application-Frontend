@@ -37,6 +37,18 @@ const Signup = ({setToSingup}) =>{
         theme: "colored",
         });
     }
+    if (!(password.length > 8)) {
+      return toast.warn('Password should be greater than 8 character ', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
+    }
     const data = {
       name : name, 
       email : email, 
@@ -75,8 +87,8 @@ const Signup = ({setToSingup}) =>{
   }
 
   return(
-    <div className="flex items-center justify-center h-screen  bg-[#CFFCE8]">
-      <div className="w-full max-w-md p-8 space-y-3 rounded-xl  ">
+    <div className="flex items-center justify-center h-screen  bg-gradient-to-r from-pink-500 to-yellow-500">
+      <div className="w-full max-w-md p-8 space-y-3 rounded-xl  bg-gradient-to-r from-amber-200 to-yellow-500">
           <h1 className="text-2xl font-bold text-center">Sign Up</h1>
           <form action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
             <div className="space-y-1 text-sm">
@@ -95,10 +107,10 @@ const Signup = ({setToSingup}) =>{
                 <label className="block d">Re-enter Password</label>
                 <input value={rePassword} onChange={e => setRePassword(e.target.value)} type="password" name="repassword" id="repassword" placeholder="Password" className="w-full px-4 py-3 rounded-md border-2 " />
             </div>
-            <button onClick={submit} className="block w-full p-3 text-center rounded-sm text-white focus:outline-none  bg-[#10ABAC]  hover:bg-[#0B8390] rounded ">Sign up</button>
+            <button onClick={submit} className="block w-full p-3 text-center rounded-sm text-white focus:outline-none  bg-blue-400  hover:bg-blue-500 rounded ">Sign up</button>
           </form>
         <p className="text-xs text-center sm:px-6 d">Already have a account ?
-            <span className="underline " onClick={() => {setToSingup(false)}} > Login</span>
+            <span className="underline text-blue-600" onClick={() => {setToSingup(false)}} > Login</span>
         </p>
       </div>
       <ToastContainer />

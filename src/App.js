@@ -1,14 +1,10 @@
-import { useState } from "react";
-import Login from "./components/login";
-import Signup from "./components/signup";
+import LandingPage from "./components/landingPage";
 
 function App() {
 
-  const [toSingup, setToSingup] = useState(false)
-
   return (
     <div >
-      {toSingup ? <Signup setToSingup={setToSingup}/> : <Login setToSingup={setToSingup} />}
+      <LandingPage />
     </div>
   );
 }
