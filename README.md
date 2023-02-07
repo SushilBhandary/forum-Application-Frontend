@@ -7,7 +7,7 @@ A “Forum Application” where the users can come, create posts, and read other
 ### SnapShot of design
 
 ![StreetStyle](./src/Image/idea.PNG)
-
+ 
 ### SnapShot of the Webpage
 
 ![StreetStyle](./src/Image/img1.PNG)
