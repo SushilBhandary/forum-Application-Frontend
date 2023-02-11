@@ -5,6 +5,7 @@ import axios from "axios";
 import API from "./api";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import { FaRegCommentAlt, FaThumbsUp, FaRegThumbsUp } from "react-icons/fa";
 
 
 const  PostsList = ({posts, setPosts, isMyPost}) => {
@@ -14,6 +15,8 @@ const  PostsList = ({posts, setPosts, isMyPost}) => {
     const [open, setOpen] = useState(false);
     const [article, setArticle] = useState('')
     const [id, setId] = useState('')
+    const [showComment, setShowComment] = useState({})
+    const [showLike, setShowLike] = useState({})
 
     const closeModal = (e) => {
         e.preventDefault()
@@ -25,6 +28,16 @@ const  PostsList = ({posts, setPosts, isMyPost}) => {
     const add = (e,id) => {
         commentList[id] = e.target.value
         setCommentList(commentList)
+    }
+
+    const toShowComment = (id) => {
+        showComment[id] = !showComment[id]
+        setShowComment({...showComment})
+    }
+
+    const toShowLike = (id) => {
+        showLike[id] = !showLike[id]
+        setShowLike({...showLike})
     }
 
     const addComment = async(e, id) => {
@@ -70,7 +83,10 @@ const  PostsList = ({posts, setPosts, isMyPost}) => {
               })
               .then( (res) => {
                 setPosts( res.data.posts)
-                setCommentList({})
+                console.log("commentList befour--->",commentList);
+                let a = {}
+                setCommentList({...a})
+                console.log("commentList after--->",commentList);
               })
               .catch( e => toast.error(e.response.data.error, {
                 position: "top-center",
@@ -224,26 +240,41 @@ const  PostsList = ({posts, setPosts, isMyPost}) => {
                         <div className="my-5 text-xl bg-[#fff] p-2 rounded-md bg-gradient-to-r from-pink-500 to-yellow-500 text-white">
                             {post.article}
                         </div>
-                        <div className="bg-yellow-300 px-2 rounded-lg">
-                            <div className="my-5 flex flex-col ">
-                                <h1 className="text-2xl ">Comments</h1>
-                                <div className=" flex px-5 items-baseline bg-yellow-300">
-                                    <input value={commentList[post._id]} onChange={e => add(e,post._id)} type="text" name="comment" placeholder="Add comment" className="w-full px-4 py-2 rounded-md  border-2 mr-2 bg-amber-100" />
-                                    <button className="rounded-lg bg-gradient-to-r from-pink-500 to-yellow-500 px-5 py-3 my-5" onClick={e => addComment(e, post._id)}>Add</button>
-                                </div>
-                                { post.comment && 
-                                    post.comment.map(com => (
-                                        <div className=" flex p-5 items-baseline rounded-lg bg-yellow-300 ">
-                                            <div class="relative w-6 h-6 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex justify-center items-center text-center p-5 shadow-xl mr-4">
-                                                {com.userName[0]}
-                                            </div> 
-                                            <div className="mx-2 text-lg">{com.userName}</div>
-                                            <div className="mx-2 text-base bg-amber-100 px-2 py-1 rounded-lg ">{com.comment}</div>
-                                        </div>
-                                    ))
-                                }
-                            </div>
+                        <div className="flex justify-around">
+                            <FaRegCommentAlt onClick={e => toShowComment( post._id)} size={42}/>
+                            {  showLike[post._id] ? (
+                                
+                                <FaThumbsUp size={42}  onClick={e => toShowLike( post._id)}/>
+                            ) : (
+                                <FaRegThumbsUp size={42} onClick={e => toShowLike( post._id)}/>
+                            )}
+                            {/* <div>hi :{showComment[post._id]}</div>  */}
                         </div>
+                        { showComment[post._id] ? (
+                            <div className="bg-yellow-300 px-2 rounded-lg">
+                                <div className="my-5 flex flex-col ">
+                                    <h1 className="text-2xl ">Comments</h1>
+                                    <div className=" flex px-5 items-baseline bg-yellow-300">
+                                        <input value={commentList[post._id]} onChange={e => add(e,post._id)} type="text" name="comment" placeholder="Add comment" className="w-full px-4 py-2 rounded-md  border-2 mr-2 bg-amber-100" />
+                                        <button className="rounded-lg bg-gradient-to-r from-pink-500 to-yellow-500 px-5 py-3 my-5" onClick={e => addComment(e, post._id)}>Add</button>
+                                    </div>
+                                    { post.comment && 
+                                        post.comment.map(com => (
+                                            <div className=" flex p-5 items-baseline rounded-lg bg-yellow-300 ">
+                                                <div class="relative w-6 h-6 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex justify-center items-center text-center p-5 shadow-xl mr-4">
+                                                    {com.userName[0]}
+                                                </div> 
+                                                <div className="mx-2 text-lg">{com.userName}</div>
+                                                <div className="mx-2 text-base bg-amber-100 px-2 py-1 rounded-lg ">{com.comment}</div>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                        ) : (
+                            <></>
+                        )}
+                        
                         
                     </div>
                 </div>
