@@ -118,7 +118,7 @@ const PostFunction = ({posts, setPosts, setIsMyPost} ) => {
   }
 
   return (
-    <div className="w-[20%] rounded-lg p-8 flex flex-col bg-amber-100">
+    <div className="md:w-[20%] w-[90%] m-auto md:m-1 rounded-lg p-8 flex  bg-amber-100 md:flex-col md:justify-around flex-row">
         <button onClick={() => setOpen(true)} className="px-5 py-3 my-5 rounded-lg bg-amber-100 bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500 ">Create Post</button>
         <Popup open={open}  modal nested>
           <form className=" text-lg container p-8 space-y-6 rounded-md shadow  bg-gradient-to-r from-[#833ab4] to-[#1dc0fd] ">
@@ -134,10 +134,11 @@ const PostFunction = ({posts, setPosts, setIsMyPost} ) => {
                   <button onClick={e => submitPost(e)}  className=" px-4 py-2 font-bold rounded shadow text-white bg-blue-500 focus:outline-none hover:bg-blue-600 ">Post</button>
               </div>
           </form>
+          <ToastContainer/>
         </Popup>
         <button onClick={myPosts} className="px-5 py-3 my-5 rounded-lg bg-amber-100 bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500">My Post</button>
         <button onClick={refresh} className="px-5 py-3 my-5 rounded-lg bg-amber-100 bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500">Refresh Posts</button>
-        <ToastContainer/>
+        
     </div>
   )
 }

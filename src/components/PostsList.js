@@ -206,7 +206,7 @@ const  PostsList = ({posts, setPosts, isMyPost}) => {
     }
 
     return (
-        <div className="w-[75%] rounded-lg p-5 bg-amber-100">
+        <div className="md:w-[75%] md-[90%] m-auto md:m-1 rounded-lg p-5 bg-amber-100">
             <Popup open={open}  modal nested>
                 <form className=" text-lg container p-8 space-y-6 rounded-md shadow bg-gradient-to-r from-[#833ab4] to-[#1dc0fd]">
                     <button className="btn btn-circle absolute  top-0 right-0 mt-2 mr-2"  onClick={closeModal}>
@@ -221,7 +221,7 @@ const  PostsList = ({posts, setPosts, isMyPost}) => {
                         <button onClick={e => editPost(e)}  className=" px-4 py-2 font-bold rounded shadow text-white bg-blue-500 focus:outline-none hover:bg-blue-600 ">Update Post</button>
                     </div>
                 </form>
-            </Popup>
+            </Popup> 
             { posts && posts.map( post => (
                 <div  key={post._id} className="my-2 bg-amber-200 rounded-lg ">
                     { isMyPost && (

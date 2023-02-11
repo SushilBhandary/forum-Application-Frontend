@@ -8,7 +8,7 @@ const  PostPage = ({logout, posts, setPosts}) => {
   return (
     <div className="bg-amber-50  " >
       <Header logout={logout}/>
-      <div className="flex mx-auto w-[95%] mt-8 p-5 justify-between items-start">
+      <div className="flex mx-auto w-[95%] mt-8 p-5 justify-between items-start flex-col md:flex-row">
         <PostFunction posts={posts} setPosts={setPosts} setIsMyPost={setIsMyPost}/>
         <PostsList  posts={posts} setPosts={setPosts} isMyPost={isMyPost}/>
       </div> 
