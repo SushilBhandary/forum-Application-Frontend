@@ -118,7 +118,7 @@ const PostFunction = ({posts, setPosts, setIsMyPost} ) => {
   }
 
   return (
-    <div className="md:w-[20%] w-[90%] m-auto md:m-1 rounded-lg p-8 flex  bg-amber-100 md:flex-col md:justify-around flex-row">
+    <div className="md:w-[20%] w-[90%] mx-auto my-1 md:mx-1 rounded-lg md:p-8 p-2 flex  bg-amber-100 md:flex-col md:justify-around justify-between flex-row">
         <button onClick={() => setOpen(true)} className="px-5 py-3 my-5 rounded-lg bg-amber-100 bg-gradient-to-r hover:from-pink-500 hover:to-yellow-500 ">Create Post</button>
         <Popup open={open}  modal nested>
           <form className=" text-lg container p-8 space-y-6 rounded-md shadow  bg-gradient-to-r from-[#833ab4] to-[#1dc0fd] ">

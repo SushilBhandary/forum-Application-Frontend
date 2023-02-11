@@ -206,7 +206,7 @@ const  PostsList = ({posts, setPosts, isMyPost}) => {
     }
 
     return (
-        <div className="md:w-[75%] md-[90%] m-auto md:m-1 rounded-lg p-5 bg-amber-100">
+        <div className="md:w-[75%] md-[90%] m-auto md:m-1 rounded-lg md:p-5 p-1 bg-amber-100">
             <Popup open={open}  modal nested>
                 <form className=" text-lg container p-8 space-y-6 rounded-md shadow bg-gradient-to-r from-[#833ab4] to-[#1dc0fd]">
                     <button className="btn btn-circle absolute  top-0 right-0 mt-2 mr-2"  onClick={closeModal}>
@@ -230,7 +230,7 @@ const  PostsList = ({posts, setPosts, isMyPost}) => {
                             <button onClick={e => deletPost(e, post._id)}  className="rounded-lg bg-[#fe2054] px-5 py-3 mt-2">delete</button>
                         </div>
                     ) }
-                    <div className="rounded-lg py-5 px-8 ">
+                    <div className="rounded-lg py-5 md:px-8 px-2 ">
                         <div className="my-5 text-2xl flex items-center" > 
                             <span class="relative w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex justify-center items-center text-center p-5 shadow-xl mr-4">
                                 {post.createdByName[0]}
